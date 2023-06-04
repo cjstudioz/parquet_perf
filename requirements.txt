@@ -1,0 +1,6 @@
+pyarrow
+pandas
+polars
+boto3
+s3fs
+contexttimer
