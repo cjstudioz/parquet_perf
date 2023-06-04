@@ -1,0 +1,17 @@
+import pandas as pd
+import pyarrow.parquet as pq
+import pyarrow.dataset as ds
+import s3fs
+from contexttimer import Timer
+fs = s3fs.S3FileSystem(anon=True)
+
+for i, rawpath in enumerate([
+    'nyc-taxi-test/row_groups_1.parquet',
+    'nyc-taxi-test/row_groups_10.parquet',
+    'nyc-taxi-test/row_groups_216.parquet',
+    ]):
+    path = f's3://{rawpath}'
+    with Timer() as t:
+        with fs.open(rawpath, 'rb') as f:
+            res = f.read()
+    print(t)
